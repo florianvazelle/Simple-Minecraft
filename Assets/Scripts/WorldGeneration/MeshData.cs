@@ -95,13 +95,4 @@ public class MeshData {
 		uvs.Add(new Vector2 (tUnit * texture.x, tUnit * texture.y + tUnit));
 		uvs.Add(new Vector2 (tUnit * texture.x, tUnit * texture.y));
 	}
-
-	public void Clear(){
-		vertices.Clear();
-		triangles.Clear();
-		uvs.Clear();
-
-		colVertices.Clear();
-		colTriangles.Clear();
-	}
 }

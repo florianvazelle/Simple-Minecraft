@@ -18,8 +18,10 @@ public class World : MonoBehaviour {
 		chunk.World = this;
 		chunk.ChunkPos = chunkPos;
 
+        chunks.Add(chunkPos, chunk);
+
         Terrain terrain = new Terrain();
-        terrain.GenerateChunk(chunk, x, y, z);
+        terrain.GenerateChunk(chunk);
 	}
 
 	public Block GetBlock(int x, int y, int z){
@@ -30,12 +32,21 @@ public class World : MonoBehaviour {
 
 	private Chunk GetChunk(int x, int y, int z){
 		int size = Chunk.chunkSize;
-		int cx = Mathf.FloorToInt(x / size) * size;
-		int cy = Mathf.FloorToInt(y / size) * size;
-		int cz = Mathf.FloorToInt(z / size) * size;
+        int cx = Mathf.FloorToInt(x / (float)size) * size;
+        int cy = Mathf.FloorToInt(y / (float)size) * size;
+        int cz = Mathf.FloorToInt(z / (float)size) * size;
 
 		Chunk chunk = null;
 		chunks.TryGetValue(new Vector3Int(cx, cy, cz), out chunk);
 		return chunk;
 	}
+
+    public void DestroyChunk(int x, int y, int z){
+        Vector3Int chunkPos = new Vector3Int(x, y, z);
+        Chunk chunk = null;
+        if (chunks.TryGetValue(chunkPos, out chunk)){
+            Destroy(chunk.gameObject);
+            chunks.Remove(chunkPos);
+        }
+    }
 }

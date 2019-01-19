@@ -11,6 +11,7 @@ public class Chunk : MonoBehaviour {
 	private MeshFilter filter;
 	private MeshCollider collider;
 
+    //Un chunk doit avoir la référence du monde pour regarder les blocks autour de lui
 	private World world;
 	private Vector3Int chunkPos;
 
@@ -61,7 +62,7 @@ public class Chunk : MonoBehaviour {
 
 	public Block GetBlock(int x, int y, int z){
 		if(InRange(x) && InRange(y) && InRange(z)) return blocks[x, y, z];
-		return world.GetBlock(x, y, z);
+        return world.GetBlock(x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
 	}
 
 	private bool InRange(int x){
@@ -82,6 +83,6 @@ public class Chunk : MonoBehaviour {
 		mesh.RecalculateNormals();
 		collider.sharedMesh = mesh;
 
-		meshData.Clear();
+		meshData = null;
 	}
 }

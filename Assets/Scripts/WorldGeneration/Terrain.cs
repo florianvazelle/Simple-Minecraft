@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Terrain : MonoBehaviour {
+public class Terrain {
 
-    public void GenerateChunk(Chunk chunk, int x, int y, int z){
+    public void GenerateChunk(Chunk chunk){
         int size = Chunk.chunkSize;
-        for(int i = x ; i < x + size ; i++){
-            for(int j = y ; j < y + size ; j++){
-                for(int k = z ; k < z + size ; k++){
-                    chunk.blocks[i, j, k] = new Block();
+        for(int x = 0 ; x < size ; x++){
+            for(int y = 0 ; y < size ; y++){
+                for(int z = 0 ; z < size ; z++){
+                    chunk.blocks[x, y, z] = new Block();
                 }
             }
         }
