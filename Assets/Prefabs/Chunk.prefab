@@ -54,7 +54,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
@@ -105,3 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60a7dcdb564be44fa32345e0bbd028a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  update: 0
+  rendered: 0

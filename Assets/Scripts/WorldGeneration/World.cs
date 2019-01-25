@@ -26,8 +26,6 @@ public class World : MonoBehaviour {
 
 		Terrain terrain = new Terrain();
 		terrain.GenerateChunk(chunk);
-
-		//chunk.SetBlocksUnmodified();
 	}
 
 	public Block GetBlock(int x, int y, int z){

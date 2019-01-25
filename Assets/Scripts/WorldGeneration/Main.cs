@@ -72,7 +72,7 @@ public class Main : MonoBehaviour {
 		Vector3Int chunkPlayer = Vector3Int.CeilToInt(new Vector3(transform.position.x / Chunk.chunkSize,
 			transform.position.y / Chunk.chunkSize,
 			transform.position.z / Chunk.chunkSize));
-		
+
 		if (buildList.Count == 0) {
 			for (int i = 0; i < chunkPositions.Length; i++){
 				Vector3Int newChunkPos = new Vector3Int(chunkPositions[i].x * Chunk.chunkSize + chunkPlayer.x, 0, chunkPositions[i].z * Chunk.chunkSize + chunkPlayer.z);
@@ -84,7 +84,7 @@ public class Main : MonoBehaviour {
 		}
 	}
 
-	void LoadAndRenderChunks(){
+	private void LoadAndRenderChunks(){
 		for (int i = 0; i < 2; i++){
 			if (buildList.Count != 0){
 				BuildChunk(buildList[0]);
@@ -99,7 +99,7 @@ public class Main : MonoBehaviour {
 		}
 	}
 
-	void BuildChunk(Vector3Int chunkPos){
+	private void BuildChunk(Vector3Int chunkPos){
 		for (int y = chunkPos.y - Chunk.chunkSize; y <= chunkPos.y + Chunk.chunkSize; y += Chunk.chunkSize){
 			if (y > 64 || y < -64) continue;
 

@@ -32,8 +32,7 @@ public class Terrain {
 		int stoneHeight = Mathf.FloorToInt(stoneBaseHeight);
 		stoneHeight += Mathf.FloorToInt(Noise.CalcPixel3D(x, 0, z, stoneMountainFrequency, Mathf.FloorToInt(stoneMountainHeight)));
 
-		if (stoneHeight < stoneMinHeight)
-			stoneHeight = Mathf.FloorToInt(stoneMinHeight);
+		if (stoneHeight < stoneMinHeight) stoneHeight = Mathf.FloorToInt(stoneMinHeight);
 
 		stoneHeight += Mathf.FloorToInt(Noise.CalcPixel3D(x, 0, z, stoneBaseNoise, Mathf.FloorToInt(stoneBaseNoiseHeight)));
 
