@@ -5,13 +5,14 @@ using UnityEngine;
 public class Chunk : MonoBehaviour {
 
 	public static int chunkSize = 16;
-    public Block[,,] blocks = new Block[chunkSize, chunkSize, chunkSize];
-	private bool update = true;
+    	public Block[,,] blocks = new Block[chunkSize, chunkSize, chunkSize];
+    	public bool update = true;
+	public bool rendered = false;
 
-	private MeshFilter filter;
+ 	private MeshFilter filter;
 	private MeshCollider collider;
 
-    //Un chunk doit avoir la référence du monde pour regarder les blocks autour de lui
+    	//Un chunk doit avoir la référence du monde pour regarder les blocks autour de lui
 	private World world;
 	private Vector3Int chunkPos;
 
@@ -38,11 +39,12 @@ public class Chunk : MonoBehaviour {
 	}
 
 	private void UpdateMesh(){
+		rendered = true;
 		MeshData meshData = new MeshData();
 		for(int x = 0 ; x < chunkSize ; x++){
 			for(int y = 0 ; y < chunkSize ; y++){
 				for(int z = 0 ; z < chunkSize ; z++){
-					meshData = blocks[x, y, z].InitMeshData(this, x, y, z, meshData); 
+					meshData = blocks[x, y, z].InitMeshData(this, x, y, z, meshData);
 				}
 			}
 		}
@@ -51,8 +53,8 @@ public class Chunk : MonoBehaviour {
 
 	public int[] NeighborsCheck(int x, int y, int z){
 		List<int> neighborsSolid = new List<int>();
-        if(!GetBlock(x + 1, y, z).IsSolid) neighborsSolid.Add(0);
-        if(!GetBlock(x - 1, y, z).IsSolid) neighborsSolid.Add(1);
+        	if(!GetBlock(x + 1, y, z).IsSolid) neighborsSolid.Add(0);
+        	if(!GetBlock(x - 1, y, z).IsSolid) neighborsSolid.Add(1);
 		if(!GetBlock(x, y + 1, z).IsSolid) neighborsSolid.Add(2);
 		if(!GetBlock(x, y - 1, z).IsSolid) neighborsSolid.Add(3);
 		if(!GetBlock(x, y, z + 1).IsSolid) neighborsSolid.Add(4);
@@ -62,7 +64,7 @@ public class Chunk : MonoBehaviour {
 
 	public Block GetBlock(int x, int y, int z){
 		if(InRange(x) && InRange(y) && InRange(z)) return blocks[x, y, z];
-        return world.GetBlock(x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
+        	return world.GetBlock(x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
 	}
 
 	private bool InRange(int x){
@@ -85,4 +87,13 @@ public class Chunk : MonoBehaviour {
 
 		meshData = null;
 	}
+
+	public void SetBlock(int x, int y, int z, Block block){
+		if(InRange(x) && InRange(y) && InRange(z)) blocks[x, y, z] = block;
+		else world.SetBlock(x + chunkPos.x, y + chunkPos.y, z + chunkPos.z, block);
+	}
+
+	//public void SetBlocksUnmodified(){
+	//	foreach (Block block in blocks) block.IsChanged = false;
+	//}
 }

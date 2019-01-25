@@ -21,18 +21,18 @@ public class MeshData {
 		float v = 1f;
 		foreach(int side in sides){
 			switch(side) {
-                case 0:
-                    AddVertex(new Vector3 (x + v, y - v, z));
-                    AddVertex(new Vector3 (x + v, y, z));
-                    AddVertex(new Vector3 (x + v, y, z + v));
-                    AddVertex(new Vector3 (x + v, y - v, z + v));
-                    break;
-                case 1:
-                    AddVertex(new Vector3 (x, y - v, z + v));
-                    AddVertex(new Vector3 (x, y, z + v));
-                    AddVertex(new Vector3 (x, y, z));
-                    AddVertex(new Vector3 (x, y - v, z));
-                    break;
+				case 0:
+					AddVertex(new Vector3 (x + v, y - v, z));
+					AddVertex(new Vector3 (x + v, y, z));
+					AddVertex(new Vector3 (x + v, y, z + v));
+					AddVertex(new Vector3 (x + v, y - v, z + v));
+					break;
+				case 1:
+					AddVertex(new Vector3 (x, y - v, z + v));
+					AddVertex(new Vector3 (x, y, z + v));
+					AddVertex(new Vector3 (x, y, z));
+					AddVertex(new Vector3 (x, y - v, z));
+					break;
 				case 2:
 					AddVertex(new Vector3 (x,  y,  z + v));
 					AddVertex(new Vector3 (x + v, y,  z + v));
