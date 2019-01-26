@@ -50,14 +50,10 @@ public class Main : MonoBehaviour {
 	private List<Vector3Int> updateList = new List<Vector3Int>();
 	private List<Vector3Int> buildList = new List<Vector3Int>();
 
-	int timer = 0;
+	private int timer = 0;
 
 	void Start(){
-		//world.CreateChunk(0, 0, 0);
-		//world.CreateChunk(16, 0, 0);
-		//world.CreateChunk(0, 16, 0);
-		//world.CreateChunk(0, 0, 16);
-		//world.DestroyChunk(0, 0, 0);
+		Simplex.Noise.Seed = Random.Range(100000, 999999);
 	}
 
 	void Update(){
@@ -115,13 +111,17 @@ public class Main : MonoBehaviour {
 
 	private void DeleteChunks(){
 		if (timer == 10) {
+			List<Vector3Int> chunkToRemove = new List<Vector3Int>();
 			foreach (var chunk in world.Chunks) {
 				float distance = Vector3.Distance(
 					new Vector3(chunk.Value.ChunkPos.x, 0, chunk.Value.ChunkPos.z),
 					new Vector3(transform.position.x, 0, transform.position.z));
 
-				if (distance > 256) world.DestroyChunk(chunk.Key.x, chunk.Key.y, chunk.Key.z);
+				if (distance > 256) chunkToRemove.Add(new Vector3Int(chunk.Key.x, chunk.Key.y, chunk.Key.z));
 			}
+
+			// Doit etre fait en dehors du foreach, sinon erreur car on enleve des elements de la list pendant qu'on la parcours
+			foreach(Vector3Int chunkPos in chunkToRemove) world.DestroyChunk(chunkPos.x, chunkPos.y, chunkPos.z);
 			timer = 0;
 		}
 		timer++;
