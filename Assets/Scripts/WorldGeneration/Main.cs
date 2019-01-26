@@ -68,10 +68,11 @@ public class Main : MonoBehaviour {
 
 	private void FindChunksToLoad(){
 		int size = Chunk.chunkSize;
-
-		Vector3Int chunkPlayer = Vector3Int.CeilToInt(new Vector3(transform.position.x / Chunk.chunkSize,
-			transform.position.y / Chunk.chunkSize,
-			transform.position.z / Chunk.chunkSize));
+		Vector3Int chunkPlayer = new Vector3Int(
+			Mathf.FloorToInt(transform.position.x / Chunk.chunkSize) * Chunk.chunkSize,
+			Mathf.FloorToInt(transform.position.y / Chunk.chunkSize) * Chunk.chunkSize,
+			Mathf.FloorToInt(transform.position.z / Chunk.chunkSize) * Chunk.chunkSize
+		);
 
 		if (buildList.Count == 0) {
 			for (int i = 0; i < chunkPositions.Length; i++){
