@@ -67,7 +67,7 @@ public class Chunk : MonoBehaviour {
 		return world.GetBlock(x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
 	}
 
-	private bool InRange(int x){
+	public static bool InRange(int x){
 		return (x >= 0 && x < chunkSize);
 	}
 
